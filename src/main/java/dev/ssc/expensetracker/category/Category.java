@@ -1,16 +1,12 @@
-package dev.ssc.expensetracker.account;
+package dev.ssc.expensetracker.category;
 
-
-
-public class Account {
+public class Category {
     private Long id;
     private String name;
-    private double balance;
 
-    public Account(Long id, String name, double balance) {
+    public Category(Long id, String name) {
         this.id = id;
         this.name = name;
-        this.balance = balance;
     }
 
     public Long getId() {
@@ -29,20 +25,11 @@ public class Account {
         this.name = name;
     }
 
-    public double getBalance() {
-        return balance;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
-
     @Override
     public String toString() {
-        return "Account{" +
+        return "Category{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", balance=" + balance +
                 '}';
     }
 }
