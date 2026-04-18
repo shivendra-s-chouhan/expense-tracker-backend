@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "userId": 1,
+    "name": "Food"
+  },
+  {
+    "id": 2,
+    "userId": 1,
+    "name": "Transportation"
+  },
+  {
+    "id": 3,
+    "userId": 1,
+    "name": "Entertainment"
+  },
+  {
+    "id": 4,
+    "userId": 1,
+    "name": "Salary"
+  },
+  {
+    "id": 5,
+    "userId": 1,
+    "name": "Utilities"
+  },
+  {
+    "id": 6,
+    "userId": 1,
+    "name": "Investments"
+  }
+]

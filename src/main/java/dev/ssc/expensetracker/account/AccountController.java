@@ -17,11 +17,11 @@ public class AccountController {
   }
   @GetMapping
   public ResponseEntity<List<Account>> getAllAccounts() {
-    return ResponseEntity.ok(accountRepository.getAccounts());
+    return ResponseEntity.ok(accountRepository.findAll());
   }
   @GetMapping("/{id}")
-  public ResponseEntity<Account> getAccountById(@PathVariable Long id) {
-    Optional<Account> account = accountRepository.getAccountById(id);
+  public ResponseEntity<Account> getAccountById(@PathVariable Integer id) {
+    Optional<Account> account = accountRepository.findById(id);
     if (account.isPresent()) {
       return ResponseEntity.ok(account.get());
     } else {
@@ -31,16 +31,21 @@ public class AccountController {
   @ResponseStatus(HttpStatus.CREATED)
   @PostMapping
   void addAccount(@Validated @RequestBody Account account) {
-    accountRepository.addAccount(account);
+    accountRepository.save(account);
   }
   @ResponseStatus(HttpStatus.NO_CONTENT)
   @PutMapping("/{id}")
-  void updateAccount(@Validated @RequestBody Account account, @PathVariable Long id) {
-    accountRepository.updateAccount(account, id);
+  void updateAccount(@Validated @RequestBody Account account, @PathVariable Integer id) {
+    accountRepository.save(account);
   }
   @ResponseStatus(HttpStatus.NO_CONTENT)
   @DeleteMapping("/{id}")
-  void deleteAccount(@PathVariable Long id) {
-    accountRepository.removeAccount(id);
+  void deleteAccount(@PathVariable Integer id) {
+    accountRepository.deleteById(id);
+  }
+  
+  @GetMapping("/")
+  public ResponseEntity<List<Account>> getAllAccountsByUserId(@RequestParam Integer userId) {
+    return ResponseEntity.ok(accountRepository.findByUserId(userId));
   }
 }

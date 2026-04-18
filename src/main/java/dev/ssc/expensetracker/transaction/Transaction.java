@@ -2,35 +2,60 @@ package dev.ssc.expensetracker.transaction;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDate;
 
+@Table("transactions")
 public class Transaction {
-    private Long id;
+    @Id
+    private Integer id;
+
+    @Column("user_id")
+    private Integer userId;
+
     @Positive
     private double amount;
+
     @NotNull
     private TransactionType type;
-    private Long accountId;
-    private Long categoryId;
+
+    @Column("account_id")
+    private Integer accountId;
+
+    @Column("category_id")
+    private Integer categoryId;
+
     @NotNull
     private LocalDate date;
 
-    public Transaction(Long id, double amount, TransactionType type, Long accountId, Long categoryId, LocalDate date) {
+    public Transaction(Integer id, Integer userId, double amount, TransactionType type, Integer accountId, Integer categoryId, LocalDate date) {
         this.id = id;
+        this.userId = userId;
         this.amount = amount;
         this.type = type;
         this.accountId = accountId;
         this.categoryId = categoryId;
         this.date = date;
     }
+    public Transaction() {}
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public double getAmount() {
@@ -49,19 +74,19 @@ public class Transaction {
         this.type = type;
     }
 
-    public Long getAccountId() {
+    public Integer getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(Long accountId) {
+    public void setAccountId(Integer accountId) {
         this.accountId = accountId;
     }
 
-    public Long getCategoryId() {
+    public Integer getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Long categoryId) {
+    public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
     }
 
@@ -77,6 +102,7 @@ public class Transaction {
     public String toString() {
         return "Transaction{" +
                 "id=" + id +
+                ", userId=" + userId +
                 ", amount=" + amount +
                 ", type='" + type + '\'' +
                 ", accountId=" + accountId +

@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "userId": 1,
+    "amount": 75.25,
+    "type": "EXPENSE",
+    "accountId": 5,
+    "categoryId": 1,
+    "date": "2026-04-01"
+  },
+  {
+    "id": 2,
+    "userId": 1,
+    "amount": 2200.0,
+    "type": "INCOME",
+    "accountId": 5,
+    "categoryId": 4,
+    "date": "2026-04-02"
+  },
+  {
+    "id": 3,
+    "userId": 1,
+    "amount": 40.0,
+    "type": "EXPENSE",
+    "accountId": 6,
+    "categoryId": 2,
+    "date": "2026-04-03"
+  },
+  {
+    "id": 4,
+    "userId": 1,
+    "amount": 120.0,
+    "type": "EXPENSE",
+    "accountId": 4,
+    "categoryId": 5,
+    "date": "2026-04-04"
+  },
+  {
+    "id": 5,
+    "userId": 1,
+    "amount": 300.0,
+    "type": "SAVINGS_FD",
+    "accountId": 4,
+    "categoryId": 6,
+    "date": "2026-04-05"
+  },
+  {
+    "id": 6,
+    "userId": 1,
+    "amount": 150.0,
+    "type": "SAVINGS_STOCKS",
+    "accountId": 5,
+    "categoryId": 6,
+    "date": "2026-04-06"
+  },
+  {
+    "id": 7,
+    "userId": 1,
+    "amount": 95.0,
+    "type": "EXPENSE",
+    "accountId": 6,
+    "categoryId": 3,
+    "date": "2026-04-07"
+  }
+]

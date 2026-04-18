@@ -18,11 +18,11 @@ public class CategoryController {
   }
   @GetMapping
   public ResponseEntity<List<Category>> getAllCategories() {
-    return ResponseEntity.ok(categoryRepository.getCategories());
+    return ResponseEntity.ok(categoryRepository.findAll());
   }
   @GetMapping("/{id}")
-  public ResponseEntity<Category> getCategoryById(@PathVariable Long id) {
-    Optional<Category> category = categoryRepository.getCategoryById(id);
+  public ResponseEntity<Category> getCategoryById(@PathVariable Integer id) {
+    Optional<Category> category = categoryRepository.findById(id);
     if (category.isPresent()) {
       return ResponseEntity.ok(category.get());
     } else {
@@ -32,16 +32,21 @@ public class CategoryController {
   @ResponseStatus(HttpStatus.CREATED)
   @PostMapping
   void addCategory(@Validated @RequestBody Category category) {
-    categoryRepository.addCategory(category);
+    categoryRepository.save(category);
   }
   @ResponseStatus(HttpStatus.NO_CONTENT)
   @PutMapping("/{id}")
-  void updateCategory(@Validated @RequestBody Category category, @PathVariable Long id) {
-    categoryRepository.updateCategory(category, id);
+  void updateCategory(@Validated @RequestBody Category category, @PathVariable Integer id) {
+    categoryRepository.save(category);
   }
   @ResponseStatus(HttpStatus.NO_CONTENT)
   @DeleteMapping("/{id}")
-  void deleteCategory(@PathVariable Long id) {
-    categoryRepository.removeCategory(id);
+  void deleteCategory(@PathVariable Integer id) {
+    categoryRepository.deleteById(id);
+  }
+  
+  @GetMapping("/")
+  public ResponseEntity<List<Category>> getAllCategoriesByUserId(@RequestParam Integer userId) {
+    return ResponseEntity.ok(categoryRepository.findByUserId(userId));
   }
 }

@@ -13,7 +13,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping ("/api/transactions")
 public class TransactionController {
-  TransactionRepository transactionRepository;
+  private final TransactionRepository transactionRepository;
   
   public TransactionController (TransactionRepository transactionRepository) {
     this.transactionRepository = transactionRepository;
@@ -21,12 +21,12 @@ public class TransactionController {
   
   @GetMapping
   public ResponseEntity<List<Transaction>> getAllTransactions() {
-    return ResponseEntity.ok(transactionRepository.getTransactions());
+    return ResponseEntity.ok(transactionRepository.findAll());
   }
   
   @GetMapping ("/{id}")
-  public ResponseEntity<Transaction> getTransactionById (@PathVariable Long id) {
-    Optional<Transaction> t = transactionRepository.getTransactionById(id);
+  public ResponseEntity<Transaction> getTransactionById (@PathVariable Integer id) {
+    Optional<Transaction> t = transactionRepository.findById(id);
     if (t.isPresent()) {
       return ResponseEntity.ok(t.get());
     }else{
@@ -37,22 +37,25 @@ public class TransactionController {
   @ResponseStatus(HttpStatus.CREATED)
   @PostMapping
   void addTransaction (@Validated @RequestBody Transaction transaction) {
-    transactionRepository.addTransaction(transaction);
+    transactionRepository.save(transaction);
   }
   
   
   @ResponseStatus(HttpStatus.NO_CONTENT)
   @PutMapping ("/{id}")
-  void updateTransaction(@Validated @RequestBody Transaction transaction,  @PathVariable Long id) {
-    transactionRepository.updateTransaction(transaction, id);
+  void updateTransaction(@Validated @RequestBody Transaction transaction,  @PathVariable Integer id) {
+    transactionRepository.save(transaction);
   }
   
   @ResponseStatus(HttpStatus.NO_CONTENT)
   @DeleteMapping ("/{id}")
-  void deleteTransaction(@PathVariable Long id) {
-    transactionRepository.removeTransaction(id);
+  void deleteTransaction(@PathVariable Integer id) {
+    transactionRepository.deleteById(id);
   }
   
-  
+  @GetMapping("/")
+  public ResponseEntity<List<Transaction>> getTransactionsByUserId (@RequestParam Integer userId) {
+    return ResponseEntity.ok(transactionRepository.findByUserId(userId));
+  }
   
 }

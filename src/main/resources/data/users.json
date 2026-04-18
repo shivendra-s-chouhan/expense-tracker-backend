@@ -1,0 +1,117 @@
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "userName": "john_doe",
+    "email": "john.doe@example.com",
+    "address": {
+      "street": "MG Road",
+      "suite": "Suite 101",
+      "city": "Bengaluru",
+      "zipcode": "560001",
+      "geo": {
+        "lng": 77.5946,
+        "lat": 12.9716
+      }
+    },
+    "phone": "+91-9876543210",
+    "website": "johndoe.dev",
+    "company": {
+      "name": "FinEdge Solutions",
+      "catchPhrase": "Track every rupee with confidence",
+      "bs": "expense analytics platform"
+    }
+  },
+  {
+    "id": 2,
+    "name": "Jane Smith",
+    "userName": "jane_smith",
+    "email": "jane.smith@example.com",
+    "address": {
+      "street": "Park Street",
+      "suite": "Flat 4B",
+      "city": "Kolkata",
+      "zipcode": "700016",
+      "geo": {
+        "lng": 88.3639,
+        "lat": 22.5726
+      }
+    },
+    "phone": "+91-9123456780",
+    "website": "janesmith.in",
+    "company": {
+      "name": "Ledger Labs",
+      "catchPhrase": "Smarter money habits for teams",
+      "bs": "personal finance tooling"
+    }
+  },
+  {
+    "id": 3,
+    "name": "Michael Ross",
+    "userName": "michael_ross",
+    "email": "michael.ross@example.com",
+    "address": {
+      "street": "Connaught Place",
+      "suite": "Office 12",
+      "city": "New Delhi",
+      "zipcode": "110001",
+      "geo": {
+        "lng": 77.209,
+        "lat": 28.6139
+      }
+    },
+    "phone": "+91-9988776655",
+    "website": "mross.tech",
+    "company": {
+      "name": "CashPilot",
+      "catchPhrase": "Clarity for every transaction",
+      "bs": "budget workflow software"
+    }
+  },
+  {
+    "id": 4,
+    "name": "Emma Wilson",
+    "userName": "emma_wilson",
+    "email": "emma.wilson@example.com",
+    "address": {
+      "street": "Marine Drive",
+      "suite": "Apt 9C",
+      "city": "Mumbai",
+      "zipcode": "400002",
+      "geo": {
+        "lng": 72.8777,
+        "lat": 19.076
+      }
+    },
+    "phone": "+91-9012345678",
+    "website": "emmawilson.co",
+    "company": {
+      "name": "SpendWise",
+      "catchPhrase": "Financial control without friction",
+      "bs": "consumer budgeting services"
+    }
+  },
+  {
+    "id": 5,
+    "name": "Alex Brown",
+    "userName": "alex_brown",
+    "email": "alex.brown@example.com",
+    "address": {
+      "street": "Banjara Hills Road No. 12",
+      "suite": "Block C",
+      "city": "Hyderabad",
+      "zipcode": "500034",
+      "geo": {
+        "lng": 78.4867,
+        "lat": 17.385
+      }
+    },
+    "phone": "+91-9090909090",
+    "website": "alexbrown.app",
+    "company": {
+      "name": "Budget Beacon",
+      "catchPhrase": "Insights that keep spending honest",
+      "bs": "financial planning software"
+    }
+  }
+]

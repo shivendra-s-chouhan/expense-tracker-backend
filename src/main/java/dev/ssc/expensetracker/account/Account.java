@@ -1,24 +1,42 @@
 package dev.ssc.expensetracker.account;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
-
+@Table("accounts")
 public class Account {
-    private Long id;
+    @Id
+    private Integer id;
+    @Column("user_id")
+    private Integer userId;
     private String name;
     private double balance;
 
-    public Account(Long id, String name, double balance) {
+    public Account(Integer id, Integer userId, String name, double balance) {
         this.id = id;
+        this.userId = userId;
         this.name = name;
         this.balance = balance;
     }
 
-    public Long getId() {
+    public Account() {
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getName() {
@@ -41,6 +59,7 @@ public class Account {
     public String toString() {
         return "Account{" +
                 "id=" + id +
+                ", userId=" + userId +
                 ", name='" + name + '\'' +
                 ", balance=" + balance +
                 '}';
