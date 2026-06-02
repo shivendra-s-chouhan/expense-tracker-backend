@@ -58,7 +58,7 @@ public class TransactionController {
     return ResponseEntity.ok(transactionRepository.findByUserId(userId));
   }
   @GetMapping("/")
-  public ResponseEntity<List<Transaction>> findAllTransactionDetailsWithAccountAndCategoryNameByUserId (@RequestParam Integer userId) {
+  public ResponseEntity<List<TransactionResponseDTO>> findAllTransactionDetailsWithAccountAndCategoryNameByUserId (@RequestParam Integer userId) {
     return ResponseEntity.ok(transactionRepository.findAllTransactionDetailsWithAccountAndCategoryNameByUserId(userId));
   }
   
