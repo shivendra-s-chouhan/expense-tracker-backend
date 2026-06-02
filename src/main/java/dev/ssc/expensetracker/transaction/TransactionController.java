@@ -53,9 +53,13 @@ public class TransactionController {
     transactionRepository.deleteById(id);
   }
   
-  @GetMapping("/")
+  @GetMapping("/transactionsbyuserid")
   public ResponseEntity<List<Transaction>> getTransactionsByUserId (@RequestParam Integer userId) {
     return ResponseEntity.ok(transactionRepository.findByUserId(userId));
+  }
+  @GetMapping("/")
+  public ResponseEntity<List<Transaction>> findAllTransactionDetailsWithAccountAndCategoryNameByUserId (@RequestParam Integer userId) {
+    return ResponseEntity.ok(transactionRepository.findAllTransactionDetailsWithAccountAndCategoryNameByUserId(userId));
   }
   
 }

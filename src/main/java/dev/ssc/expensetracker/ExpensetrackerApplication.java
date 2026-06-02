@@ -13,10 +13,13 @@ import org.springframework.context.annotation.Bean;
 public class ExpensetrackerApplication {
 	private static final Logger log = LoggerFactory.getLogger(ExpensetrackerApplication.class);
 	public static void main(String[] args) {
+		
 		SpringApplication.run(ExpensetrackerApplication.class, args);
+
+		
 	}
 	@Bean
-  ObjectMapper objectMapper() {
+	ObjectMapper objectMapper() {
 		return JsonMapper.builder()
 				.findAndAddModules()
 				.build();

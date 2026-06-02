@@ -15,4 +15,7 @@ import java.util.Optional;
 public interface TransactionRepository extends ListCrudRepository<Transaction, Integer> {
       @Query("select * from transactions where user_id = :userId")
       List<Transaction> findByUserId(Integer userId);
+      
+      @Query("select t.id as transaction_id, t.amount, t.date, a.name as account_name, c.name as category_name from transactions t inner join accounts a on t.account_id = a.id inner join categories c on t.category_id = c.id")
+      List<Transaction> findAllTransactionDetailsWithAccountAndCategoryNameByUserId(Integer userId);
 }

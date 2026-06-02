@@ -14,6 +14,7 @@ public class Transaction {
     private Integer id;
 
     @Column("user_id")
+    @NotNull
     private Integer userId;
 
     @Positive
