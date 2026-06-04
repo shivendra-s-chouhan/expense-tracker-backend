@@ -9,7 +9,9 @@ public class TransactionResponseDTO {
   private double amount;
   private TransactionType type;
   private String accountName;
+  private Integer accountId;
   private String categoryName;
+  private Integer categoryId;
   private LocalDate date;
 
   public Integer getTransaction_id() {
@@ -51,7 +53,25 @@ public class TransactionResponseDTO {
   public void setAccountName(String accountName) {
     this.accountName = accountName;
   }
-
+  
+  
+  public Integer getAccountId() {
+    return accountId;
+  }
+  
+  public void setAccountId(Integer accountId) {
+    this.accountId = accountId;
+  }
+  
+  public Integer getCategoryId() {
+    return categoryId;
+  }
+  
+  public void setCategoryId(Integer categoryId) {
+    this.categoryId = categoryId;
+  }
+  
+  
   public String getCategoryName() {
     return categoryName;
   }
