@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS users (
                                      name VARCHAR(100),
     user_name VARCHAR(50) NOT NULL UNIQUE,
     email VARCHAR(100),
+    password VARCHAR(100),
     street VARCHAR(100),
     suite VARCHAR(100),
     city VARCHAR(100),

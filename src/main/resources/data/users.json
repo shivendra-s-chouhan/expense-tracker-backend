@@ -4,6 +4,7 @@
     "name": "John Doe",
     "userName": "john_doe",
     "email": "john.doe@example.com",
+    "password": "password123",
     "address": {
       "street": "MG Road",
       "suite": "Suite 101",
@@ -27,6 +28,7 @@
     "name": "Jane Smith",
     "userName": "jane_smith",
     "email": "jane.smith@example.com",
+    "password": "securepass456",
     "address": {
       "street": "Park Street",
       "suite": "Flat 4B",
@@ -50,6 +52,7 @@
     "name": "Michael Ross",
     "userName": "michael_ross",
     "email": "michael.ross@example.com",
+    "password": "mross789",
     "address": {
       "street": "Connaught Place",
       "suite": "Office 12",
@@ -73,6 +76,7 @@
     "name": "Emma Wilson",
     "userName": "emma_wilson",
     "email": "emma.wilson@example.com",
+    "password": "ewilson321",
     "address": {
       "street": "Marine Drive",
       "suite": "Apt 9C",
@@ -96,6 +100,7 @@
     "name": "Alex Brown",
     "userName": "alex_brown",
     "email": "alex.brown@example.com",
+    "password": "abrown654",
     "address": {
       "street": "Banjara Hills Road No. 12",
       "suite": "Block C",

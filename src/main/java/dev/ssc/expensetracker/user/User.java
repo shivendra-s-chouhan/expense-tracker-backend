@@ -15,6 +15,7 @@ public record User(
     @Column("user_name")
     String userName,
     String email,
+    String  password,
     @Embedded.Nullable(prefix = "")
     Address address,
     String phone,
