@@ -24,10 +24,20 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
+	// JJWT API dependency (needed at compile time)
+	implementation 'io.jsonwebtoken:jjwt-api:0.12.5'
+
+
 
 
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'org.postgresql:postgresql'
+	// JJWT Implementation (only needed at runtime)
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.5'
+
+	// JJWT Jackson support for JSON parsing (only needed at runtime)
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.5'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-jdbc-test'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
