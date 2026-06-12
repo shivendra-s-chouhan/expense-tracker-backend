@@ -30,4 +30,33 @@ public class JwtUtils {
                .compact();
   }
   
+  //extract email id from token's payload
+  public String getEmailFromJwtToken(String token) {
+    return Jwts.parser()
+               .verifyWith(jwtSecretKey)
+               .build()
+               .parseSignedClaims(token)
+               .getPayload()
+               .getSubject();
+  }
+  
+  //validate the token
+  public boolean validateJwtToken(String authToken){
+    try{
+      Jwts.parser().verifyWith(jwtSecretKey).build().parseSignedClaims(authToken);
+      return true;
+    } catch(Exception e){
+      System.err.println("JWT Validation Failed: " + e.getMessage());
+    }
+    return false;
+  }
+  
+  //remove "Bearer " prefix from header
+  public String parseJwtFromHeader(String headerAuth){
+    if(headerAuth != null && headerAuth.startsWith("Bearer ")){
+      return headerAuth.substring(7);
+    }
+    return null;
+  }
+  
 }

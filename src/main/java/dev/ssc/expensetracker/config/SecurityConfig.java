@@ -15,9 +15,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig   {
   private final SecurityBypassFilter securityByPassFilter;
+  private final AuthTokenFilter authTokenFilter;
   
-  public SecurityConfig(SecurityBypassFilter securityByPassFilter){
+  public SecurityConfig(SecurityBypassFilter securityByPassFilter, AuthTokenFilter authTokenFilter){
     this.securityByPassFilter = securityByPassFilter;
+    this.authTokenFilter = authTokenFilter;
   }
   
   @Bean
@@ -26,14 +28,15 @@ public class SecurityConfig   {
   }
   
   @Bean
-  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
         .csrf(csrf -> csrf.disable()) //Disabled for local development API testing
         .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/api/auth/**").permitAll() //Allow unauthenticated access to auth endpoints registration/login
-            .anyRequest().authenticated() //Require authentication for all other endpoints
+                                           .requestMatchers("/api/auth/**").permitAll() //Allow unauthenticated access to auth endpoints registration/login
+                                           .anyRequest().authenticated() //Require authentication for all other endpoints
         )
-        .addFilterBefore(securityByPassFilter, UsernamePasswordAuthenticationFilter.class); //Add our custom filter to bypass security at the front of the filter chain
+        .addFilterBefore(securityByPassFilter, UsernamePasswordAuthenticationFilter.class) //Add our custom filter to bypass security at the front of the filter chain
+        .addFilterAfter(authTokenFilter, SecurityBypassFilter.class);  //2nd filter
     return http.build();
   }
 }
