@@ -1,8 +1,11 @@
 package dev.ssc.expensetracker.account;
 
 
+import dev.ssc.expensetracker.user.User;
+import dev.ssc.expensetracker.user.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -12,9 +15,14 @@ import java.util.Optional;
 @RequestMapping("/api/accounts")
 public class AccountController {
   AccountRepository accountRepository;
-  public AccountController(AccountRepository accountRepository) {
+  UserRepository userRepository;
+  public AccountController(AccountRepository accountRepository, UserRepository userRepository) {
     this.accountRepository = accountRepository;
+    this.userRepository = userRepository;
   }
+  
+  /* can be use for testing
+
   @GetMapping
   public ResponseEntity<List<Account>> getAllAccounts() {
     return ResponseEntity.ok(accountRepository.findAll());
@@ -28,6 +36,8 @@ public class AccountController {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
   }
+     */
+
   @ResponseStatus(HttpStatus.CREATED)
   @PostMapping
   void addAccount(@Validated @RequestBody Account account) {
@@ -45,7 +55,22 @@ public class AccountController {
   }
   
   @GetMapping("/")
-  public ResponseEntity<List<Account>> getAllAccountsByUserId(@RequestParam Integer userId) {
-    return ResponseEntity.ok(accountRepository.findByUserId(userId));
+  public ResponseEntity<List<Account>> getAllAccountsByUserId() {
+    // extract principal string from SecurityContextHolder \
+    String currentEmail = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    if("".equals(currentEmail)){
+      Optional<User> devUser = userRepository.findByEmail("john.doe@example.com");
+      if(devUser.isEmpty()){
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+      }
+      return ResponseEntity.ok(accountRepository.findByUserId(devUser.get().id()));
+    } else {
+      return userRepository.findByEmail(currentEmail)
+                 .map(user -> {
+                   List<Account> userAccounts = accountRepository.findByUserId(user.id());
+                   return ResponseEntity.ok(userAccounts);
+                 })
+                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
+    }
   }
 }
