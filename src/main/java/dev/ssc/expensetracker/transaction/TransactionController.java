@@ -1,5 +1,6 @@
 package dev.ssc.expensetracker.transaction;
 
+import dev.ssc.expensetracker.user.User;
 import dev.ssc.expensetracker.user.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,6 +43,19 @@ public class TransactionController {
   @ResponseStatus(HttpStatus.CREATED)
   @PostMapping
   void addTransaction (@Validated @RequestBody Transaction transaction) {
+    //extract email from security context
+    String currentEmail = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    if("".equals(currentEmail)){
+      //get default user
+      Optional<dev.ssc.expensetracker.user.User> devUser = userRepository.findByEmail("john.doe@example.com");
+      if(devUser.isEmpty()){
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+      }
+      transaction.setUserId(devUser.get().id());
+      transactionRepository.save(transaction);
+    }
+    Optional<dev.ssc.expensetracker.user.User> curUser = userRepository.findByEmail(currentEmail);
+    transaction.setUserId(curUser.map(User::id).orElseThrow(() -> new RuntimeException("UserNotFound")));
     transactionRepository.save(transaction);
   }
   
@@ -48,6 +63,18 @@ public class TransactionController {
   @ResponseStatus(HttpStatus.NO_CONTENT)
   @PutMapping ("/{id}")
   void updateTransaction(@Validated @RequestBody Transaction transaction,  @PathVariable Integer id) {
+    //extract email from security context
+    String currentEmail = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    if("".equals(currentEmail)){
+      //get default user
+     Optional<dev.ssc.expensetracker.user.User> devUser = userRepository.findByEmail("john.doe@example.com");
+     if(devUser.isEmpty()){
+       throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+     }     transaction.setUserId(devUser.get().id());
+      transactionRepository.save(transaction);
+    }
+    Optional<dev.ssc.expensetracker.user.User> curUser = userRepository.findByEmail(currentEmail);
+    transaction.setUserId(curUser.map(User::id).orElseThrow(() -> new RuntimeException("UserNotFound")));
     transactionRepository.save(transaction);
   }
   
