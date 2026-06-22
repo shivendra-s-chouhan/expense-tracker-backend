@@ -9,6 +9,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.List;
 
 
 @Configuration
@@ -30,6 +35,7 @@ public class SecurityConfig   {
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
+        .cors(cors -> cors.configurationSource(corsConfigurationSource()))
         .csrf(csrf -> csrf.disable()) //Disabled for local development API testing
         .authorizeHttpRequests(auth -> auth
                                            .requestMatchers("/api/auth/**").permitAll() //Allow unauthenticated access to auth endpoints registration/login
@@ -38,5 +44,27 @@ public class SecurityConfig   {
         .addFilterBefore(securityByPassFilter, UsernamePasswordAuthenticationFilter.class) //Add our custom filter to bypass security at the front of the filter chain
         .addFilterAfter(authTokenFilter, SecurityBypassFilter.class);  //2nd filter
     return http.build();
+  }
+  
+  
+  @Bean
+  public CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration configuration = new CorsConfiguration();
+    
+    //Allow react local server origin
+    configuration.setAllowedOrigins(List.of("http://localhost:5173"));
+    
+    //Allow std http methods
+    configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+    
+    //Allow all headers so it accepts 'Authorization Bearer' header
+    configuration.setAllowedHeaders(List.of("Authorization", "Content-Type", "Cache-Control"));
+    
+    //Allow cookies/auth sessions
+    configuration.setAllowCredentials(true);
+    
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/**", configuration); //apply rules to all end points
+    return source;
   }
 }
