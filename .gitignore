@@ -35,3 +35,9 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Local / Temp / OS Files ###
+tmp/
+*.log
+.DS_Store
+Thumbs.db
