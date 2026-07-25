@@ -33,15 +33,7 @@ The project is structured around key domains representing clean boundaries:
 
 ## Database Schema & Data Model
 
-The application uses an SQL schema initialized via `schema.sql` with the following structure:
-
-```mermaid
-erDiagram
-    users ||--o{ accounts : "has"
-    users ||--o{ categories : "has"
-    users ||--o{ transactions : "performs"
-    accounts ||--o{ transactions : "funded_by"
-    categories ||--o{ transactions : "classified_under"
+The application uses an SQL schema initialized via `schema.sql`.
 
     users {
         int id PK "Identity"
